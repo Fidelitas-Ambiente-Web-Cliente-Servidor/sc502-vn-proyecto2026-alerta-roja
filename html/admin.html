@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrador | Alerta Roja</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div class="contenedor encabezado-contenido">
+      <h1>Alerta Roja</h1>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="crear-reporte.html">Crear reporte</a></li>
+          <li><a href="reportes.html">Reportes</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <section class="titulo-pagina">
+      <h2>Panel administrativo</h2>
+      <p>Gestione los reportes ciudadanos, cambie estados y priorice incidencias.</p>
+    </section>
+
+    <section class="panel-admin">
+      <div class="resumen-admin">
+        <div class="card-resumen">
+          <h3>48</h3>
+          <p>Reportes totales</p>
+        </div>
+        <div class="card-resumen">
+          <h3>12</h3>
+          <p>En revisión</p>
+        </div>
+        <div class="card-resumen">
+          <h3>9</h3>
+          <p>Prioritarios</p>
+        </div>
+        <div class="card-resumen">
+          <h3>18</h3>
+          <p>Atendidos</p>
+        </div>
+      </div>
+
+      <div class="tabla-contenedor">
+        <table class="tabla-admin">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Categoría</th>
+              <th>Ubicación</th>
+              <th>Estado</th>
+              <th>Prioridad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AR-001</td>
+              <td>Inundación en vía principal</td>
+              <td>Inundación</td>
+              <td>San José, Escazú</td>
+              <td><span class="badge badge-estado revision">En revisión</span></td>
+              <td>Alta</td>
+              <td class="acciones-admin">
+                <button class="btn btn-principal" type="button">Cambiar estado</button>
+                <button class="btn btn-secundario" type="button">Detalle</button>
+              </td>
+            </tr>
+            <tr>
+              <td>AR-002</td>
+              <td>Asalto en parada de buses</td>
+              <td>Asalto</td>
+              <td>Heredia, Heredia</td>
+              <td><span class="badge badge-estado prioritario">Prioritario</span></td>
+              <td>Alta</td>
+              <td class="acciones-admin">
+                <button class="btn btn-principal" type="button">Cambiar estado</button>
+                <button class="btn btn-secundario" type="button">Detalle</button>
+              </td>
+            </tr>
+            <tr>
+              <td>AR-003</td>
+              <td>Accidente frente a escuela</td>
+              <td>Accidente</td>
+              <td>Alajuela, San Ramón</td>
+              <td><span class="badge badge-estado registrado">Registrado</span></td>
+              <td>Media</td>
+              <td class="acciones-admin">
+                <button class="btn btn-principal" type="button">Cambiar estado</button>
+                <button class="btn btn-secundario" type="button">Detalle</button>
+              </td>
+            </tr>
+            <tr>
+              <td>AR-004</td>
+              <td>Deslizamiento en zona montañosa</td>
+              <td>Deslizamiento</td>
+              <td>Cartago, Paraíso</td>
+              <td><span class="badge badge-estado atendido">Atendido</span></td>
+              <td>Alta</td>
+              <td class="acciones-admin">
+                <button class="btn btn-principal" type="button">Cambiar estado</button>
+                <button class="btn btn-secundario" type="button">Detalle</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
