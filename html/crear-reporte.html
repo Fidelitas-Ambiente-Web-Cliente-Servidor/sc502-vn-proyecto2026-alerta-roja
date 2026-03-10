@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Reporte | Alerta Roja</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div class="contenedor encabezado-contenido">
+      <h1>Alerta Roja</h1>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="reportes.html">Reportes</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <section class="formulario-seccion">
+      <div class="titulo-seccion">
+        <h2>Registrar nuevo reporte</h2>
+        <p>Complete la información para reportar una emergencia o situación comunitaria.</p>
+      </div>
+
+      <form class="formulario-reporte">
+        <div class="grupo-formulario">
+          <label for="titulo">Título del reporte</label>
+          <input type="text" id="titulo" name="titulo" placeholder="Ejemplo: Inundación en vía principal" required>
+        </div>
+
+        <div class="grupo-formulario">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" name="descripcion" rows="5" placeholder="Describa lo ocurrido..." required></textarea>
+        </div>
+
+        <div class="fila-formulario">
+          <div class="grupo-formulario">
+            <label for="categoria">Categoría</label>
+            <select id="categoria" name="categoria" required>
+              <option value="">Seleccione una categoría</option>
+              <option>Inundación</option>
+              <option>Incendio</option>
+              <option>Accidente</option>
+              <option>Deslizamiento</option>
+              <option>Asalto</option>
+              <option>Riesgo comunitario</option>
+            </select>
+          </div>
+
+          <div class="grupo-formulario">
+            <label for="tipo">Tipo de reporte</label>
+            <select id="tipo" name="tipo" required>
+              <option value="">Seleccione una opción</option>
+              <option>Anónimo</option>
+              <option>Identificado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fila-formulario">
+          <div class="grupo-formulario">
+            <label for="provincia">Provincia</label>
+            <select id="provincia" name="provincia" required>
+              <option value="">Seleccione una provincia</option>
+              <option>San José</option>
+              <option>Alajuela</option>
+              <option>Cartago</option>
+              <option>Heredia</option>
+              <option>Guanacaste</option>
+              <option>Puntarenas</option>
+              <option>Limón</option>
+            </select>
+          </div>
+
+          <div class="grupo-formulario">
+            <label for="canton">Cantón</label>
+            <select id="canton" name="canton" required>
+              <option value="">Seleccione un cantón</option>
+              <option>San José</option>
+              <option>Escazú</option>
+              <option>Heredia</option>
+              <option>Alajuela</option>
+              <option>Cartago</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fila-formulario">
+          <div class="grupo-formulario">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+
+          <div class="grupo-formulario">
+            <label for="hora">Hora</label>
+            <input type="time" id="hora" name="hora" required>
+          </div>
+        </div>
+
+        <div class="acciones-formulario">
+          <button type="submit" class="btn btn-principal">Enviar reporte</button>
+          <a href="reportes.html" class="btn btn-secundario">Ver reportes</a>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
