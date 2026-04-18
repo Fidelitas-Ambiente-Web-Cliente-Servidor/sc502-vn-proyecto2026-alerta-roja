@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel Administrador | Alerta Roja</title>
+  <title>Panel de Administración | Alerta Roja</title>
   <link rel="stylesheet" href="../css/estilos.css">
 </head>
-<body>
+<body data-admin="true">
+
   <header class="encabezado">
     <div class="contenedor encabezado-contenido">
       <h1>Alerta Roja</h1>
+
       <nav>
         <ul class="menu">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="crear-reporte.html">Crear reporte</a></li>
           <li><a href="reportes.html">Reportes</a></li>
+          <li><a href="admin.html">Admin</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="registro.html">Registro</a></li>
         </ul>
       </nav>
     </div>
@@ -22,96 +27,87 @@
 
   <main class="contenedor">
     <section class="titulo-pagina">
-      <h2>Panel administrativo</h2>
-      <p>Gestione los reportes ciudadanos, cambie estados y priorice incidencias.</p>
+      <h2>Panel de administración</h2>
+      <p>Espacio exclusivo para la gestión y supervisión de reportes ciudadanos.</p>
     </section>
 
     <section class="panel-admin">
-      <div class="resumen-admin">
-        <div class="card-resumen">
-          <h3>48</h3>
-          <p>Reportes totales</p>
-        </div>
-        <div class="card-resumen">
-          <h3>12</h3>
-          <p>En revisión</p>
-        </div>
-        <div class="card-resumen">
-          <h3>9</h3>
-          <p>Prioritarios</p>
-        </div>
-        <div class="card-resumen">
-          <h3>18</h3>
-          <p>Atendidos</p>
-        </div>
+      <div class="titulo-seccion">
+        <h2>Resumen general</h2>
+        <p>Vista rápida de la actividad del sistema.</p>
       </div>
 
-      <div class="tabla-contenedor">
-        <table class="tabla-admin">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Título</th>
-              <th>Categoría</th>
-              <th>Ubicación</th>
-              <th>Estado</th>
-              <th>Prioridad</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>AR-001</td>
-              <td>Inundación en vía principal</td>
-              <td>Inundación</td>
-              <td>San José, Escazú</td>
-              <td><span class="badge badge-estado revision">En revisión</span></td>
-              <td>Alta</td>
-              <td class="acciones-admin">
-                <button class="btn btn-principal" type="button">Cambiar estado</button>
-                <button class="btn btn-secundario" type="button">Detalle</button>
-              </td>
-            </tr>
-            <tr>
-              <td>AR-002</td>
-              <td>Asalto en parada de buses</td>
-              <td>Asalto</td>
-              <td>Heredia, Heredia</td>
-              <td><span class="badge badge-estado prioritario">Prioritario</span></td>
-              <td>Alta</td>
-              <td class="acciones-admin">
-                <button class="btn btn-principal" type="button">Cambiar estado</button>
-                <button class="btn btn-secundario" type="button">Detalle</button>
-              </td>
-            </tr>
-            <tr>
-              <td>AR-003</td>
-              <td>Accidente frente a escuela</td>
-              <td>Accidente</td>
-              <td>Alajuela, San Ramón</td>
-              <td><span class="badge badge-estado registrado">Registrado</span></td>
-              <td>Media</td>
-              <td class="acciones-admin">
-                <button class="btn btn-principal" type="button">Cambiar estado</button>
-                <button class="btn btn-secundario" type="button">Detalle</button>
-              </td>
-            </tr>
-            <tr>
-              <td>AR-004</td>
-              <td>Deslizamiento en zona montañosa</td>
-              <td>Deslizamiento</td>
-              <td>Cartago, Paraíso</td>
-              <td><span class="badge badge-estado atendido">Atendido</span></td>
-              <td>Alta</td>
-              <td class="acciones-admin">
-                <button class="btn btn-principal" type="button">Cambiar estado</button>
-                <button class="btn btn-secundario" type="button">Detalle</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="resumen-admin">
+        <div class="card-resumen">
+          <h3>📌</h3>
+          <p>Total de reportes</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>⚠️</h3>
+          <p>Reportes prioritarios</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>👥</h3>
+          <p>Usuarios registrados</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>📨</h3>
+          <p>Reportes enviados</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-admin" style="margin-top:30px;">
+      <div class="titulo-seccion">
+        <h2>Acciones administrativas</h2>
+        <p>Opciones de gestión disponibles para el administrador.</p>
+      </div>
+
+      <div class="resumen-admin">
+        <div class="card-resumen">
+          <h3>🗂️</h3>
+          <p>Revisar reportes registrados</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>✅</h3>
+          <p>Actualizar estado de reportes</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>📤</h3>
+          <p>Gestionar envío a instituciones</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>🔐</h3>
+          <p>Control de acceso por roles</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-admin" style="margin-top:30px; margin-bottom:40px;">
+      <div class="titulo-seccion">
+        <h2>Observación</h2>
+        <p>
+          Este panel está protegido por rol. Solo usuarios con perfil de
+          <strong>Administrador</strong> pueden acceder a esta vista.
+        </p>
       </div>
     </section>
   </main>
+
+  <footer style="background:#222; color:white; padding:25px 0; margin-top:40px;">
+    <div class="contenedor" style="text-align:center;">
+      <p><strong>Alerta Roja</strong></p>
+      <p>Panel administrativo del sistema de reportes ciudadanos.</p>
+      <p>2026</p>
+    </div>
+  </footer>
+
+  <script src="../Js/app.js"></script>
 </body>
 </html>

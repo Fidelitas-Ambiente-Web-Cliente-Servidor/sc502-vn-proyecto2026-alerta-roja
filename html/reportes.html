@@ -31,12 +31,12 @@
         <label for="filtroCategoria">Categoría</label>
         <select id="filtroCategoria">
           <option value="">Todas</option>
-          <option>Inundación</option>
-          <option>Incendio</option>
-          <option>Accidente</option>
-          <option>Deslizamiento</option>
-          <option>Asalto</option>
-          <option>Riesgo comunitario</option>
+          <option value="Inundación">Inundación</option>
+          <option value="Incendio">Incendio</option>
+          <option value="Accidente">Accidente</option>
+          <option value="Deslizamiento">Deslizamiento</option>
+          <option value="Asalto">Asalto</option>
+          <option value="Riesgo comunitario">Riesgo comunitario</option>
         </select>
       </div>
 
@@ -44,13 +44,13 @@
         <label for="filtroProvincia">Provincia</label>
         <select id="filtroProvincia">
           <option value="">Todas</option>
-          <option>San José</option>
-          <option>Alajuela</option>
-          <option>Cartago</option>
-          <option>Heredia</option>
-          <option>Guanacaste</option>
-          <option>Puntarenas</option>
-          <option>Limón</option>
+          <option value="San José">San José</option>
+          <option value="Alajuela">Alajuela</option>
+          <option value="Cartago">Cartago</option>
+          <option value="Heredia">Heredia</option>
+          <option value="Guanacaste">Guanacaste</option>
+          <option value="Puntarenas">Puntarenas</option>
+          <option value="Limón">Limón</option>
         </select>
       </div>
 
@@ -58,98 +58,26 @@
         <label for="filtroEstado">Estado</label>
         <select id="filtroEstado">
           <option value="">Todos</option>
-          <option>Registrado</option>
-          <option>En revisión</option>
-          <option>Prioritario</option>
-          <option>Atendido</option>
+          <option value="Registrado">Registrado</option>
+          <option value="En revisión">En revisión</option>
+          <option value="Prioritario">Prioritario</option>
+          <option value="Enviado">Enviado</option>
+          <option value="Atendido">Atendido</option>
+          <option value="Cerrado">Cerrado</option>
         </select>
       </div>
 
       <div class="grupo-formulario filtro-boton">
         <label>&nbsp;</label>
-        <button class="btn btn-principal" type="button">Filtrar</button>
+        <button id="btnFiltrarReportes" class="btn btn-principal" type="button">Filtrar</button>
       </div>
     </section>
 
-    <section class="contenedor-reportes">
-      <article class="tarjeta-reporte">
-        <div class="tarjeta-superior">
-          <div>
-            <span class="badge badge-categoria">Inundación</span>
-            <h3>Inundación en vía principal</h3>
-            <p class="ubicacion">San José, Escazú</p>
-          </div>
-          <span class="badge badge-estado revision">En revisión</span>
-        </div>
-
-        <p class="descripcion-reporte">
-          Se reporta acumulación de agua en la carretera principal, lo que dificulta el paso de vehículos y peatones.
-        </p>
-
-        <div class="meta-reporte">
-          <span><strong>Fecha:</strong> 10/03/2026</span>
-          <span><strong>Prioridad:</strong> Alta</span>
-          <span><strong>Votos:</strong> 24</span>
-        </div>
-
-        <div class="acciones-tarjeta">
-          <button class="btn btn-principal" type="button">Votar</button>
-          <button class="btn btn-secundario" type="button">Ver detalle</button>
-        </div>
-      </article>
-
-      <article class="tarjeta-reporte">
-        <div class="tarjeta-superior">
-          <div>
-            <span class="badge badge-categoria">Asalto</span>
-            <h3>Asalto reportado en parada de buses</h3>
-            <p class="ubicacion">Heredia, Heredia</p>
-          </div>
-          <span class="badge badge-estado prioritario">Prioritario</span>
-        </div>
-
-        <p class="descripcion-reporte">
-          Vecinos indican que varias personas han sufrido robos en horas de la noche cerca de la parada principal.
-        </p>
-
-        <div class="meta-reporte">
-          <span><strong>Fecha:</strong> 09/03/2026</span>
-          <span><strong>Prioridad:</strong> Alta</span>
-          <span><strong>Votos:</strong> 31</span>
-        </div>
-
-        <div class="acciones-tarjeta">
-          <button class="btn btn-principal" type="button">Votar</button>
-          <button class="btn btn-secundario" type="button">Ver detalle</button>
-        </div>
-      </article>
-
-      <article class="tarjeta-reporte">
-        <div class="tarjeta-superior">
-          <div>
-            <span class="badge badge-categoria">Accidente</span>
-            <h3>Accidente de tránsito frente a escuela</h3>
-            <p class="ubicacion">Alajuela, San Ramón</p>
-          </div>
-          <span class="badge badge-estado registrado">Registrado</span>
-        </div>
-
-        <p class="descripcion-reporte">
-          Se reporta colisión entre dos vehículos. Hay congestión en la zona y se recomienda tomar rutas alternas.
-        </p>
-
-        <div class="meta-reporte">
-          <span><strong>Fecha:</strong> 08/03/2026</span>
-          <span><strong>Prioridad:</strong> Media</span>
-          <span><strong>Votos:</strong> 12</span>
-        </div>
-
-        <div class="acciones-tarjeta">
-          <button class="btn btn-principal" type="button">Votar</button>
-          <button class="btn btn-secundario" type="button">Ver detalle</button>
-        </div>
-      </article>
+    <section id="contenedorReportes" class="contenedor-reportes">
+      <p>Cargando reportes...</p>
     </section>
   </main>
+
+  <script src="../Js/app.js"></script>
 </body>
 </html>

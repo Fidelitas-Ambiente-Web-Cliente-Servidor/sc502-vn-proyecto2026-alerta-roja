@@ -5,9 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio | Alerta Roja</title>
-
   <link rel="stylesheet" href="../css/estilos.css">
-
 </head>
 
 <body>
@@ -25,76 +23,146 @@
           <li><a href="registro.html">Registro</a></li>
         </ul>
       </nav>
-
     </div>
   </header>
 
   <section class="titulo-pagina">
+    <div class="contenedor">
+      <h2>Sistema de Reportes Ciudadanos</h2>
 
-    <h2>Sistema de Reportes Ciudadanos</h2>
+      <p>
+        Plataforma web diseñada para que la ciudadanía pueda reportar emergencias,
+        incidentes y situaciones de riesgo de forma rápida, organizada y accesible.
+      </p>
 
-    <p>
-      Plataforma para reportar emergencias, incidentes y situaciones de riesgo en la comunidad.
-    </p>
+      <img src="../img/alerta.jpg" alt="Sistema de emergencias"
+        style="width:100%; max-width:520px; margin-top:20px; border-radius:20px; box-shadow:0 8px 20px rgba(0,0,0,0.15);">
 
-    <img src="../img/alerta.jpg" alt="Sistema de emergencias"
-      style="width:100%; max-width:600px; margin-top:20px; border-radius:700px;">
-
+      <div style="margin-top:25px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="crear-reporte.html" class="btn btn-principal">Crear reporte</a>
+        <a href="reportes.html" class="btn btn-secundario">Ver reportes</a>
+      </div>
+    </div>
   </section>
 
   <main class="contenedor">
 
-    <h2>Bienvenido al sistema Alerta Roja</h2>
+    <section class="panel-admin" style="margin-top:40px;">
+      <div class="titulo-seccion">
+        <h2>¿Qué es Alerta Roja?</h2>
+        <p>
+          Alerta Roja permite registrar reportes ciudadanos relacionados con emergencias,
+          riesgos comunitarios y situaciones que requieren atención, facilitando la consulta
+          por categoría, provincia, cantón y estado.
+        </p>
+      </div>
+    </section>
 
-    <section class="titulo-pagina">
+    <section class="panel-admin" style="margin-top:30px;">
+      <div class="titulo-seccion">
+        <h2>Funciones principales</h2>
+        <p>Acciones que ya puedes realizar dentro de la plataforma.</p>
+      </div>
 
-      <section class="panel-admin">
-
-        <div class="titulo-seccion">
-          <h2>Tipos de reportes</h2>
-          <p>Situaciones que pueden reportarse.</p>
+      <div class="resumen-admin">
+        <div class="card-resumen">
+          <h3>📝</h3>
+          <p>Registrar reportes ciudadanos</p>
         </div>
 
-        <div class="resumen-admin">
-
-          <div class="card-resumen">
-            <h3>🔥</h3>
-            <p>Incendios</p>
-          </div>
-
-          <div class="card-resumen">
-            <h3>🚨</h3>
-            <p>Asaltos</p>
-          </div>
-
-          <div class="card-resumen">
-            <h3>🚗</h3>
-            <p>Accidentes</p>
-          </div>
-
-          <div class="card-resumen">
-            <h3>🌧️</h3>
-            <p>Inundaciones</p>
-          </div>
-
+        <div class="card-resumen">
+          <h3>📍</h3>
+          <p>Consultar por provincia y cantón</p>
         </div>
 
-      </section>
+        <div class="card-resumen">
+          <h3>🗳️</h3>
+          <p>Votar reportes relevantes</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>🔒</h3>
+          <p>Elegir entre reporte anónimo o identificado</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-admin" style="margin-top:30px;">
+      <div class="titulo-seccion">
+        <h2>Tipos de reportes</h2>
+        <p>Situaciones que pueden registrarse dentro del sistema.</p>
+      </div>
+
+      <div class="resumen-admin">
+        <div class="card-resumen">
+          <h3>🔥</h3>
+          <p>Incendios</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>🚨</h3>
+          <p>Asaltos</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>🚗</h3>
+          <p>Accidentes</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>🌧️</h3>
+          <p>Inundaciones</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>⛰️</h3>
+          <p>Deslizamientos</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>🏘️</h3>
+          <p>Riesgo comunitario</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-admin" style="margin-top:30px; margin-bottom:40px;">
+      <div class="titulo-seccion">
+        <h2>¿Cómo funciona?</h2>
+        <p>Flujo básico de uso de la plataforma.</p>
+      </div>
+
+      <div class="resumen-admin">
+        <div class="card-resumen">
+          <h3>1</h3>
+          <p>El usuario inicia sesión o se registra</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>2</h3>
+          <p>Crea un reporte con ubicación y categoría</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>3</h3>
+          <p>La comunidad consulta y vota reportes</p>
+        </div>
+
+        <div class="card-resumen">
+          <h3>4</h3>
+          <p>Los reportes pueden priorizarse para seguimiento</p>
+        </div>
+      </div>
+    </section>
 
   </main>
 
   <footer style="background:#222; color:white; padding:25px 0; margin-top:40px;">
-
     <div class="contenedor" style="text-align:center;">
-
       <p><strong>Alerta Roja</strong></p>
-
-      <p>Sistema de reportes ciudadanos para emergencias.</p>
-
+      <p>Sistema de reportes ciudadanos para emergencias y situaciones de riesgo.</p>
       <p>2026</p>
-
     </div>
-
   </footer>
 
 </body>

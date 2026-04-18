@@ -1,4 +1,5 @@
 <?php
+session_start();
 header('Content-Type: application/json');
 
 require_once 'conexion.php';
@@ -23,6 +24,14 @@ if ($nombre === '' || $correo === '' || $contrasena === '') {
     exit;
 }
 
+if (strlen($nombre) < 3) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'El nombre debe tener al menos 3 caracteres'
+    ]);
+    exit;
+}
+
 if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
     echo json_encode([
         'success' => false,
@@ -42,6 +51,15 @@ if (strlen($contrasena) < 6) {
 // Verificar si el correo ya existe
 $sqlVerificar = "SELECT id_usuario FROM ar_usuarios WHERE correo = ?";
 $stmtVerificar = $conn->prepare($sqlVerificar);
+
+if (!$stmtVerificar) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error al preparar validación: ' . $conn->error
+    ]);
+    exit;
+}
+
 $stmtVerificar->bind_param("s", $correo);
 $stmtVerificar->execute();
 $resultadoVerificar = $stmtVerificar->get_result();
@@ -55,6 +73,7 @@ if ($resultadoVerificar->num_rows > 0) {
     $conn->close();
     exit;
 }
+
 $stmtVerificar->close();
 
 // Encriptar contraseña
@@ -63,6 +82,15 @@ $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
 // Insertar usuario con rol Ciudadano = 2
 $sqlInsertar = "INSERT INTO ar_usuarios (nombre, correo, contrasena, id_rol) VALUES (?, ?, ?, 2)";
 $stmtInsertar = $conn->prepare($sqlInsertar);
+
+if (!$stmtInsertar) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error al preparar registro: ' . $conn->error
+    ]);
+    exit;
+}
+
 $stmtInsertar->bind_param("sss", $nombre, $correo, $contrasenaHash);
 
 if ($stmtInsertar->execute()) {
@@ -73,7 +101,7 @@ if ($stmtInsertar->execute()) {
 } else {
     echo json_encode([
         'success' => false,
-        'message' => 'Error al registrar el usuario'
+        'message' => 'Error al registrar el usuario: ' . $stmtInsertar->error
     ]);
 }
 
