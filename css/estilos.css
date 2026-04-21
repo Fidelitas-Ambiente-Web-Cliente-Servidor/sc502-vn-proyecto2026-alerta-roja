@@ -243,7 +243,6 @@ body {
   background-color: #2e7d32;
 }
 
-
 .panel-admin {
   margin-bottom: 50px;
 }
@@ -311,7 +310,6 @@ body {
   flex-wrap: wrap;
 }
 
-/*INDEX*/
 .titulo-pagina{
 margin:40px 0 25px;
 text-align:center;
@@ -332,4 +330,199 @@ color:#666;
 
 main h2{
 text-align:center;
+}
+
+.acciones-admin select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  padding: 10px 40px 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23b71c1c' height='20' viewBox='0 0 24 24' width='20'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+
+  transition: all 0.2s ease;
+}
+
+.acciones-admin select:hover {
+  border-color: #b71c1c;
+}
+
+.acciones-admin select:focus {
+  outline: none;
+  border-color: #b71c1c;
+  box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.2);
+}
+
+.btn-actualizar {
+  padding: 10px 16px;
+  border-radius: 12px;
+}
+
+/* ========================= */
+/* TIMELINE LIMPIO FINAL */
+/* ========================= */
+
+.contenedor-reportes {
+  position: relative;
+  padding-left: 100px;
+}
+
+/* línea vertical */
+.contenedor-reportes::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #ddd;
+}
+
+/* cada item */
+.timeline-item {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+/* fecha a la izquierda */
+.timeline-fecha {
+  position: absolute;
+  left: -160px;
+  top: 18px;
+  width: 90px;
+  font-size: 12px;
+  color: #555;
+  text-align: right;
+}
+
+/* ========================= */
+/* TARJETA LIMPIA */
+/* ========================= */
+
+.tarjeta-reporte {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* layout principal */
+.tarjeta-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.tarjeta-info {
+  flex: 1;
+}
+
+/* header */
+.tarjeta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* estado */
+.badge-estado {
+  margin-left: auto;
+  position: relative;
+  left: 40px; /* 🔧 menos exagerado */
+}
+
+/* acciones derecha */
+.tarjeta-acciones {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  margin-top: 50px;
+}
+
+/* tamaño consistente */
+.tarjeta-acciones .btn,
+.tarjeta-acciones select {
+  width: 140px;
+}
+
+/* select bonito */
+.select-estado {
+  width: 140px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23b71c1c' height='20' viewBox='0 0 24 24' width='20'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+
+  padding-right: 35px;
+}
+
+.select-estado:hover {
+  border-color: #b71c1c;
+}
+
+.select-estado:focus {
+  outline: none;
+  border-color: #b71c1c;
+  box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.2);
+}
+
+/* ========================= */
+/* TIMELINE ICONO (FIX REAL) */
+/* ========================= */
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -94px;   /* 🔥 lo mete dentro de la línea */
+  top: 100px;     /* 🔥 lo centra con la tarjeta */
+
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+  background: #b71c1c;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+
+  z-index: 2;
 }

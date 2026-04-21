@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    verificarSesion().then(s => window.sesionActual = s);
+
     async function protegerCrearReporte() {
         const formReporte = document.getElementById("formReporte");
 
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-     async function actualizarMenuSegunSesion() {
+    async function actualizarMenuSegunSesion() {
         const menu = document.querySelector(".menu");
 
         if (!menu) return;
@@ -59,12 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (sesion.logged_in) {
 
-            // cambiar login → cerrar sesión
             if (enlaceLogin) {
                 enlaceLogin.parentElement.innerHTML = '<a href="../php/logout.php">Cerrar sesión</a>';
             }
 
-            // eliminar registro
             if (enlaceRegistro) {
                 enlaceRegistro.parentElement.remove();
             }
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // =========================
+     // =========================
     // SELECTS DE UBICACION
     // =========================
     const selectProvincia = document.getElementById("provincia");
@@ -220,8 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cargarProvincias();
 
         selectProvincia.addEventListener("change", function () {
-            const idProvincia = this.value;
-            cargarCantones(idProvincia);
+            cargarCantones(this.value);
         });
     }
 
@@ -233,214 +232,302 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.success) {
                 selectProvincia.innerHTML = '<option value="">Seleccione una provincia</option>';
 
-                data.data.forEach(provincia => {
-                    selectProvincia.innerHTML += `<option value="${provincia.id_provincia}">${provincia.nombre_provincia}</option>`;
+                data.data.forEach(p => {
+                    selectProvincia.innerHTML += `<option value="${p.id_provincia}">${p.nombre_provincia}</option>`;
                 });
-            } else {
-                console.error(data.message);
             }
         } catch (error) {
-            console.error("Error al cargar provincias:", error);
+            console.error("Error provincias:", error);
         }
     }
 
     async function cargarCantones(idProvincia) {
         selectCanton.innerHTML = '<option value="">Seleccione un cantón</option>';
-
-        if (!idProvincia) {
-            return;
-        }
+        if (!idProvincia) return;
 
         try {
             const response = await fetch(`../php/obtener-ubicaciones.php?tipo=cantones&id_provincia=${idProvincia}`);
             const data = await response.json();
 
             if (data.success) {
-                data.data.forEach(canton => {
-                    selectCanton.innerHTML += `<option value="${canton.id_canton}">${canton.nombre_canton}</option>`;
+                data.data.forEach(c => {
+                    selectCanton.innerHTML += `<option value="${c.id_canton}">${c.nombre_canton}</option>`;
                 });
-            } else {
-                console.error(data.message);
             }
         } catch (error) {
-            console.error("Error al cargar cantones:", error);
+            console.error("Error cantones:", error);
         }
     }
 
-    // =========================
-    // CREAR REPORTE
-    // =========================
-    const formReporte = document.getElementById("formReporte");
+    // ==========
+   // CREAR REPORTE
+  // ===============
+const formReporte = document.getElementById("formReporte");
 
-    if (formReporte) {
-        formReporte.addEventListener("submit", async function (e) {
-            e.preventDefault();
+if (formReporte) {
+    formReporte.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-            const mensaje = document.getElementById("mensajeReporte");
-            const formData = new FormData(formReporte);
+        const mensaje = document.getElementById("mensajeReporte");
+        const formData = new FormData(formReporte);
 
-            mensaje.textContent = "";
-            mensaje.style.color = "";
-
-            try {
-                const response = await fetch("../php/crear-reporte.php", {
-                    method: "POST",
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                mensaje.textContent = data.message;
-                mensaje.style.fontWeight = "bold";
-                mensaje.style.marginTop = "10px";
-
-                if (data.success) {
-                    mensaje.style.color = "green";
-                    formReporte.reset();
-
-                    if (selectCanton) {
-                        selectCanton.innerHTML = '<option value="">Seleccione un cantón</option>';
-                    }
-
-                    setTimeout(() => {
-                        window.location.href = "reportes.html";
-                    }, 1500);
-                } else {
-                    mensaje.style.color = "red";
-                }
-            } catch (error) {
-                mensaje.textContent = "Error al conectar con el servidor.";
-                mensaje.style.color = "red";
-                console.error(error);
-            }
-        });
-    }
-
-    // =========================
-    // CARGAR REPORTES
-    // =========================
-    const contenedorReportes = document.getElementById("contenedorReportes");
-    const btnFiltrarReportes = document.getElementById("btnFiltrarReportes");
-
-    if (contenedorReportes) {
-        cargarReportes();
-
-        if (btnFiltrarReportes) {
-            btnFiltrarReportes.addEventListener("click", function () {
-                cargarReportes();
-            });
-        }
-    }
-
-    async function cargarReportes() {
-        const filtroCategoria = document.getElementById("filtroCategoria")?.value || "";
-        const filtroProvincia = document.getElementById("filtroProvincia")?.value || "";
-        const filtroEstado = document.getElementById("filtroEstado")?.value || "";
-
-        let url = `../php/obtener-reportes.php?categoria=${encodeURIComponent(filtroCategoria)}&provincia=${encodeURIComponent(filtroProvincia)}&estado=${encodeURIComponent(filtroEstado)}`;
+        mensaje.textContent = "";
+        mensaje.style.color = "";
 
         try {
-            const response = await fetch(url);
+            const response = await fetch("../php/crear-reporte.php", {
+                method: "POST",
+                body: formData
+            });
+
             const data = await response.json();
 
-            if (!data.success) {
-                contenedorReportes.innerHTML = `<p>${data.message}</p>`;
-                return;
-            }
+            mensaje.textContent = data.message;
+            mensaje.style.fontWeight = "bold";
+            mensaje.style.marginTop = "10px";
 
-            if (data.data.length === 0) {
-                contenedorReportes.innerHTML = `<p>No hay reportes disponibles.</p>`;
-                return;
-            }
+            if (data.success) {
+                mensaje.style.color = "green";
+                formReporte.reset();
 
-            contenedorReportes.innerHTML = "";
-
-            data.data.forEach(reporte => {
-                let prioridadTexto = "Baja";
-
-                if (parseInt(reporte.prioridad) >= 20) {
-                    prioridadTexto = "Alta";
-                } else if (parseInt(reporte.prioridad) >= 10) {
-                    prioridadTexto = "Media";
+                const canton = document.getElementById("canton");
+                if (canton) {
+                    canton.innerHTML = '<option value="">Seleccione un cantón</option>';
                 }
 
-                let claseEstado = "registrado";
+                setTimeout(() => {
+                    window.location.href = "reportes.html";
+                }, 1200);
 
-                if (reporte.nombre_estado === "En revisión") {
-                    claseEstado = "revision";
-                } else if (reporte.nombre_estado === "Prioritario") {
-                    claseEstado = "prioritario";
-                }
+            } else {
+                mensaje.style.color = "red";
+            }
 
-                const tarjeta = document.createElement("article");
-                tarjeta.className = "tarjeta-reporte";
+        } catch (error) {
+            mensaje.textContent = "Error al enviar el reporte.";
+            mensaje.style.color = "red";
+            console.error(error);
+        }
+    });
+}
 
-                tarjeta.innerHTML = `
-                    <div class="tarjeta-superior">
-                        <div>
-                            <span class="badge badge-categoria">${reporte.nombre_categoria}</span>
-                            <h3>${reporte.titulo}</h3>
-                            <p class="ubicacion">${reporte.nombre_provincia}, ${reporte.nombre_canton}</p>
-                            <p class="ubicacion"><strong>Reportado por:</strong> ${reporte.autor}</p>
-                        </div>
-                        <span class="badge badge-estado ${claseEstado}">${reporte.nombre_estado}</span>
-                    </div>
+    // ===============
+    // CARGAR REPORTES
+    // ===============
+    const contenedorReportes = document.getElementById("contenedorReportes");
+const btnFiltrarReportes = document.getElementById("btnFiltrarReportes");
 
-                    <p class="descripcion-reporte">
-                        ${reporte.descripcion}
-                    </p>
+if (contenedorReportes) {
+    cargarReportes();
 
-                    <div class="meta-reporte">
-                        <span><strong>Fecha:</strong> ${reporte.fecha_reporte}</span>
-                        <span><strong>Hora:</strong> ${reporte.hora_reporte}</span>
-                        <span><strong>Prioridad:</strong> ${prioridadTexto}</span>
-                        <span><strong>Votos:</strong> ${reporte.cantidad_votos}</span>
-                    </div>
+    if (btnFiltrarReportes) {
+        btnFiltrarReportes.addEventListener("click", function () {
+            cargarReportes();
+        });
+    }
+}
 
-                    <div class="acciones-tarjeta">
-                        <button class="btn btn-principal btn-votar" type="button" data-id="${reporte.id_reporte}">
-                            Votar
+function obtenerIcono(categoria) {
+    switch (categoria) {
+        case "Accidente": return "🚗";
+        case "Inundación": return "🌊";
+        case "Deslizamiento": return "🌳";
+        case "Asalto": return "⚠️";
+        default: return "📍";
+    }
+}
+
+async function cargarReportes() {
+    const filtroCategoria = document.getElementById("filtroCategoria")?.value || "";
+    const filtroProvincia = document.getElementById("filtroProvincia")?.value || "";
+    const filtroEstado = document.getElementById("filtroEstado")?.value || "";
+
+    let url = `../php/obtener-reportes.php?categoria=${encodeURIComponent(filtroCategoria)}&provincia=${encodeURIComponent(filtroProvincia)}&estado=${encodeURIComponent(filtroEstado)}`;
+
+    try {
+        const response = await fetch(url);
+        const res = await response.json();
+
+        if (!res.success) {
+            contenedorReportes.innerHTML = `<p>${res.message}</p>`;
+            return;
+        }
+
+        if (res.data.length === 0) {
+            contenedorReportes.innerHTML = `<p>No hay reportes disponibles.</p>`;
+            return;
+        }
+
+        contenedorReportes.innerHTML = "";
+
+        const sesion = window.sesionActual || {};
+
+        res.data.forEach(reporte => {
+
+            let prioridadTexto = "Baja";
+            if (parseInt(reporte.prioridad) >= 20) prioridadTexto = "Alta";
+            else if (parseInt(reporte.prioridad) >= 10) prioridadTexto = "Media";
+
+            let claseEstado = "registrado";
+            if (reporte.nombre_estado === "En revisión") claseEstado = "revision";
+            else if (reporte.nombre_estado === "Prioritario") claseEstado = "prioritario";
+            else if (reporte.nombre_estado === "Atendido") claseEstado = "atendido";
+
+            let accionesHTML = "";
+
+            if (sesion.rol !== "Administrador") {
+                accionesHTML = `
+                    <div class="tarjeta-acciones">
+                        <button class="btn btn-principal btn-votar" data-id="${reporte.id_reporte}">
+                            👍 Votar
                         </button>
                     </div>
                 `;
+            }
 
-                contenedorReportes.appendChild(tarjeta);
+            if (sesion.rol === "Administrador") {
+                accionesHTML = `
+                    <div class="tarjeta-acciones">
+                        <button class="btn btn-principal btn-votar" data-id="${reporte.id_reporte}">
+                            👍 Votar
+                        </button>
+
+                        <select id="estado-${reporte.id_reporte}" class="select-estado">
+                            <option ${reporte.nombre_estado === 'Registrado' ? 'selected' : ''}>Registrado</option>
+                            <option ${reporte.nombre_estado === 'En revisión' ? 'selected' : ''}>En revisión</option>
+                            <option ${reporte.nombre_estado === 'Prioritario' ? 'selected' : ''}>Prioritario</option>
+                            <option ${reporte.nombre_estado === 'Enviado' ? 'selected' : ''}>Enviado</option>
+                            <option ${reporte.nombre_estado === 'Atendido' ? 'selected' : ''}>Atendido</option>
+                            <option ${reporte.nombre_estado === 'Cerrado' ? 'selected' : ''}>Cerrado</option>
+                        </select>
+
+                        <button onclick="actualizarEstado(${reporte.id_reporte})"
+                            class="btn btn-principal btn-actualizar">
+                            Actualizar
+                        </button>
+                    </div>
+                `;
+            }
+
+            const tarjeta = document.createElement("article");
+            tarjeta.className = "timeline-item";
+
+            tarjeta.innerHTML = `
+                <div class="timeline-left">
+                    <div class="timeline-icon ${claseEstado}">
+                        ${obtenerIcono(reporte.nombre_categoria)}
+                    </div>
+                    <div class="timeline-fecha">
+                        ${reporte.fecha_reporte}<br>
+                        ${reporte.hora_reporte}
+                    </div>
+                </div>
+
+                <div class="tarjeta-reporte">
+                    <div class="tarjeta-layout">
+
+                        <div class="tarjeta-info">
+                            <div class="tarjeta-header">
+                                <div>
+                                    <span class="badge badge-categoria">${reporte.nombre_categoria}</span>
+                                    <h3>${reporte.titulo}</h3>
+                                    <p class="ubicacion">${reporte.nombre_provincia}, ${reporte.nombre_canton}</p>
+                                    <p class="ubicacion"><strong>Reportado por:</strong> ${reporte.autor}</p>
+                                </div>
+
+                                <span class="badge badge-estado ${claseEstado}">
+                                    ${reporte.nombre_estado}
+                                </span>
+                            </div>
+
+                            <p class="descripcion-reporte">${reporte.descripcion}</p>
+
+                            <div class="meta-reporte">
+                                <span><strong>Fecha:</strong> ${reporte.fecha_reporte}</span>
+                                <span><strong>Hora:</strong> ${reporte.hora_reporte}</span>
+                                <span><strong>Prioridad:</strong> ${prioridadTexto}</span>
+                                <span><strong>Votos:</strong> ${reporte.cantidad_votos}</span>
+                            </div>
+                        </div>
+
+                        ${accionesHTML}
+
+                    </div>
+                </div>
+            `;
+
+            contenedorReportes.appendChild(tarjeta);
+        });
+
+    } catch (error) {
+        contenedorReportes.innerHTML = `<p>Error al cargar reportes.</p>`;
+        console.error(error);
+    }
+}
+
+document.addEventListener("click", async function(e) {
+    if (e.target.classList.contains("btn-votar")) {
+
+        const id = e.target.getAttribute("data-id");
+
+        const formData = new FormData();
+        formData.append("id_reporte", id);
+
+        try {
+            const response = await fetch("../php/votar.php", {
+                method: "POST",
+                body: formData
             });
 
-            agregarEventosVotacion();
+            const data = await response.json();
+
+            alert(data.message);
+
+            if (data.success) {
+                location.reload();
+            }
+
         } catch (error) {
-            contenedorReportes.innerHTML = `<p>Error al cargar reportes.</p>`;
+            alert("Error al votar");
             console.error(error);
         }
     }
+});
 
-    function agregarEventosVotacion() {
-        const botonesVotar = document.querySelectorAll(".btn-votar");
+window.actualizarEstado = async function(id) {
+    const select = document.getElementById(`estado-${id}`);
+    const nuevoEstado = select.value;
 
-        botonesVotar.forEach(boton => {
-            boton.addEventListener("click", async function () {
-                const idReporte = this.getAttribute("data-id");
+    const formData = new FormData();
+    formData.append("id_reporte", id);
+    formData.append("estado", nuevoEstado);
 
-                try {
-                    const formData = new FormData();
-                    formData.append("id_reporte", idReporte);
+    const response = await fetch("../php/actualizar-estado.php", {
+        method: "POST",
+        body: formData
+    });
 
-                    const response = await fetch("../php/votar.php", {
-                        method: "POST",
-                        body: formData
-                    });
+    const data = await response.json();
 
-                    const data = await response.json();
-                    alert(data.message);
+    if (data.success) {
+        alert("Estado actualizado");
 
-                    if (data.success) {
-                        cargarReportes();
-                    }
-                } catch (error) {
-                    alert("Error al registrar el voto.");
-                    console.error(error);
-                }
-            });
-        });
+        const tarjeta = select.closest(".tarjeta-reporte");
+        const badge = tarjeta.querySelector(".tarjeta-header .badge-estado");
+
+        if (badge) {
+            badge.textContent = nuevoEstado;
+            badge.className = "badge badge-estado";
+
+            if (nuevoEstado === "En revisión") badge.classList.add("revision");
+            else if (nuevoEstado === "Prioritario") badge.classList.add("prioritario");
+            else if (nuevoEstado === "Atendido") badge.classList.add("atendido");
+            else badge.classList.add("registrado");
+        }
+
+    } else {
+        alert("Error al actualizar");
     }
+}
+
 });
