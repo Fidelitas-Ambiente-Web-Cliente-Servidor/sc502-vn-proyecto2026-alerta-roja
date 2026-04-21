@@ -46,31 +46,40 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    async function actualizarMenuSegunSesion() {
+     async function actualizarMenuSegunSesion() {
         const menu = document.querySelector(".menu");
 
         if (!menu) return;
 
         const sesion = await verificarSesion();
 
-        if (!sesion.logged_in) {
-            return;
-        }
-
         const enlaceLogin = menu.querySelector('a[href="login.html"]');
         const enlaceRegistro = menu.querySelector('a[href="registro.html"]');
         const enlaceAdmin = menu.querySelector('a[href="admin.html"]');
 
-        if (enlaceLogin) {
-            enlaceLogin.parentElement.innerHTML = '<a href="../php/logout.php">Cerrar sesión</a>';
-        }
+        if (sesion.logged_in) {
 
-        if (enlaceRegistro) {
-            enlaceRegistro.parentElement.remove();
-        }
+            // cambiar login → cerrar sesión
+            if (enlaceLogin) {
+                enlaceLogin.parentElement.innerHTML = '<a href="../php/logout.php">Cerrar sesión</a>';
+            }
 
-        if (sesion.rol !== "Administrador" && enlaceAdmin) {
-            enlaceAdmin.parentElement.remove();
+            // eliminar registro
+            if (enlaceRegistro) {
+                enlaceRegistro.parentElement.remove();
+            }
+
+            const liUser = document.createElement("li");
+            liUser.innerHTML = `
+                <span style="color:white; font-weight:600; margin-left:80px;">
+                    ${sesion.nombre} (${sesion.rol})
+                </span>
+            `;
+            menu.appendChild(liUser);
+
+            if (sesion.rol !== "Administrador" && enlaceAdmin) {
+                enlaceAdmin.parentElement.remove();
+            }
         }
     }
 
