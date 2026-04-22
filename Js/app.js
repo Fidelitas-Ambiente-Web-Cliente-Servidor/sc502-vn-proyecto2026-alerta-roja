@@ -1,3 +1,4 @@
+ console.log("JS CARGADO");
 document.addEventListener("DOMContentLoaded", function () {
     // =========================
     // VALIDAR SESION Y ROL
@@ -529,5 +530,32 @@ window.actualizarEstado = async function(id) {
         alert("Error al actualizar");
     }
 }
+
+// =========================
+// RESUMEN ADMIN
+// =========================
+async function cargarResumenAdmin() {
+
+    if (document.body.getAttribute("data-admin") !== "true") return;
+
+    try {
+        console.log("Cargando resumen...");
+
+        const response = await fetch("../php/resumen.php");
+        const data = await response.json();
+
+        console.log(data);
+
+        document.getElementById("totalReportes").textContent = data.total_reportes;
+        document.getElementById("reportesPrioritarios").textContent = data.prioritarios;
+        document.getElementById("usuariosRegistrados").textContent = data.usuarios;
+        document.getElementById("reportesEnviados").textContent = data.enviados;
+
+    } catch (error) {
+        console.error("Error cargando resumen:", error);
+    }
+}
+
+cargarResumenAdmin();
 
 });

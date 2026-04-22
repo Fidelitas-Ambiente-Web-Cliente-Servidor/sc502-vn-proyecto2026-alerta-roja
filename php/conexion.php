@@ -1,5 +1,5 @@
 <?php
-$host = "db";
+$host = "mysql-demo";
 $puerto = 3306;
 $basedatos = "appdb";
 $usuario = "appuser";
