@@ -556,6 +556,8 @@ async function cargarResumenAdmin() {
     }
 }
 
-cargarResumenAdmin();
+if (document.body.getAttribute("data-admin") === "true") {
+    cargarResumenAdmin();
+}
 
 });
